@@ -549,11 +549,7 @@ jobs:
             echo "::warning::Pushed ${branch}, but could not resolve a PR number. Open it manually to sync packaging manifests."
             exit 0
           fi
-          if gh pr merge "$pr_number" --auto --squash; then
-            echo "::notice::opened packaging manifest PR #${pr_number} and enabled auto-merge"
-          else
-            echo "::warning::Opened packaging manifest PR #${pr_number}, but could not enable auto-merge. Review it manually."
-          fi
+          echo "::notice::Opened packaging manifest PR #${pr_number}. Review it and use native auto-merge after required checks pass."
         env:
           GH_TOKEN: ${{ secrets.RELEASE_BOT_TOKEN || secrets.GITHUB_TOKEN }}
 

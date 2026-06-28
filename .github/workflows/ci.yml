@@ -73,3 +73,11 @@ jobs:
   # to main during its ~13 min runtime. The smoke workflow has its own
   # per-SHA concurrency group so each packaging-touching commit gets an
   # independent smoke that always runs to completion.
+
+  merge-gate:
+    name: merge-gate
+    if: always()
+    needs: [check]
+    runs-on: ubuntu-latest
+    steps:
+      - run: test "${{ needs.check.result }}" = success
